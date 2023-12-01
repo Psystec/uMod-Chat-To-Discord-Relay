@@ -8,6 +8,7 @@ Psystec's Discord: discord. /EyRgFdA
 * Team Chat forward.
 * Notifies when a player connects or disconnects.
 * Chat format can be customized.
+* You can Enable/Disable Discord metions in Rust chat.
 * Can configure the discord chat to show the players steam icon.
 
 ## Permissions
@@ -31,6 +32,8 @@ To reload the config file with a console command you will need `chattodiscord.ad
   "GlobalChatWebhook": "",
   "TeamChatWebhook": "",
   "ConnectionWebhook": "",
+  "AllowMentions": false,
+  "AllowSpecialCharacters": true,
   "GlobalChatFormat": "[{time}] [**GLOBAL**] **{username}**: `{message}`",
   "TeamChatFormat": "[{time}] [**TEAM**] **{username}**: `{message}`",
   "ConnectionFormat": "[{time}] **{username}**: {connectionstatus}",
