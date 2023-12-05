@@ -40,6 +40,13 @@ To reload the config file with a console command you will need `chattodiscord.ad
   "DateFormat": "yyyy-MM-dd HH:mm:ss"
 }
 ```
+## Message Placeholders
+
+- `{time}` -- Displays the time using the DateFormat setting in the config file.
+- `{username}` -- Displays the client's steam username.
+- `{userid}` -- Displays the client's steam id.
+- `{connectionstatus}` -- Displays the client's connection status (Connected/Disconnected) (ConnectionFormat).
+- `{message}` -- Displays the client's RUST message (ChatFormats).
 
 ## Localization
 
