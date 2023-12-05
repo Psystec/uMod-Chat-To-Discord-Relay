@@ -21,10 +21,10 @@ To reload the config file with a console command you will need `chattodiscord.ad
 - `chattodiscord loadconfig` -- Loads the config file, handy for if you make changes in the config file.
 
 ## Configuration
- 
-*  If you don't want do display GLOBAL chats, leave the `GlobalChatWebhook` empty.
-*  If you don't want do display TEAM chats, leave the `TeamChatWebhook` empty.
-*  If you don't want do display player connections in chats, leave the `ConnectionWebhook` empty.
+*  If you don't want to display the clients steam icon if discord leave the `SteamApiKey` empty.
+*  If you don't want to display GLOBAL chats, leave the `GlobalChatWebhook` empty.
+*  If you don't want to display TEAM chats, leave the `TeamChatWebhook` empty.
+*  If you don't want to display player connections in chats, leave the `ConnectionWebhook` empty.
  
 ```json
 {
