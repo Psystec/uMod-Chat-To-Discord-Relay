@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace Oxide.Plugins
 {
-    [Info("Chat to Discord Relay", "Psystec", "1.0.8")]
+    [Info("Chat to Discord Relay", "Psystec", "1.0.9")]
     [Description("Relay chat to Discord")]
 
     public class ChatToDiscord : CovalencePlugin
@@ -213,7 +213,7 @@ namespace Oxide.Plugins
                 //User cached Data from SteamPlayerInfo
                 foreach (Player p in _steamPlayerInfoCache[PlayerID].response.players)
                 {
-                    defaultImage = p.avatar;
+                    defaultImage = p.avatarfull;
                     DiscordMessage dm = new DiscordMessage();
                     dm.username = PlayerName;
                     dm.avatar_url = defaultImage;
