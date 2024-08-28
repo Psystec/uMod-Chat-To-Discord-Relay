@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace Oxide.Plugins
 {
-    [Info("Chat to Discord Relay", "Psystec", "1.0.6")]
+    [Info("Chat to Discord Relay", "Psystec", "1.0.8")]
     [Description("Relay chat to Discord")]
 
     public class ChatToDiscord : CovalencePlugin
@@ -20,7 +20,7 @@ namespace Oxide.Plugins
         private Configuration _configuration;
         private class Configuration
         {
-            public string SteamApiKey { get; set; } = "";
+            public string SteamApiKey { get; set; } = "https://steamcommunity.com/dev/apikey";
             public string GlobalChatWebhook { get; set; } = "";
             public string TeamChatWebhook { get; set; } = "";
             public string ConnectionWebhook { get; set; } = "";
@@ -79,6 +79,7 @@ namespace Oxide.Plugins
             string message = _configuration.ConnectionFormat
                 .Replace("{time}", DateTime.Now.ToString(_configuration.DateFormat))
                 .Replace("{username}", player.Name)
+                .Replace("{userid}", player.Id)
                 .Replace("{connectionstatus}", Lang("Connected"));
 
             SendToDiscord(_configuration.ConnectionWebhook, player.Name, player.Id, message);
@@ -89,6 +90,7 @@ namespace Oxide.Plugins
             string message = _configuration.ConnectionFormat
                 .Replace("{time}", DateTime.Now.ToString(_configuration.DateFormat))
                 .Replace("{username}", player.Name)
+                .Replace("{userid}", player.Id)
                 .Replace("{connectionstatus}", Lang("Disconnected"));
 
             SendToDiscord(_configuration.ConnectionWebhook, player.Name, player.Id, message);
@@ -112,7 +114,7 @@ namespace Oxide.Plugins
             {
                 message = RemoveSpecialCharacters(message);
             }
-            
+
             switch (channel)
             {
                 case Chat.ChatChannel.Global:
@@ -121,6 +123,7 @@ namespace Oxide.Plugins
                         message = _configuration.GlobalChatFormat
                             .Replace("{time}", DateTime.Now.ToString(_configuration.DateFormat))
                             .Replace("{username}", player.displayName)
+                            .Replace("{userid}", player.UserIDString)
                             .Replace("{message}", message);
 
                         SendToDiscord(_configuration.GlobalChatWebhook, player.displayName, player.UserIDString, message);
@@ -133,6 +136,7 @@ namespace Oxide.Plugins
                         message = _configuration.TeamChatFormat
                             .Replace("{time}", DateTime.Now.ToString(_configuration.DateFormat))
                             .Replace("{username}", player.displayName)
+                            .Replace("{userid}", player.UserIDString)
                             .Replace("{message}", message);
 
                         SendToDiscord(_configuration.TeamChatWebhook, player.displayName, player.UserIDString, message);
@@ -246,7 +250,7 @@ namespace Oxide.Plugins
 
                     foreach (Player p in steamPlayers.response.players)
                     {
-                        defaultImage = p.avatar;
+                        defaultImage = p.avatarfull;
                         DiscordMessage dm = new DiscordMessage();
                         dm.username = PlayerName;
                         dm.avatar_url = defaultImage;
