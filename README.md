@@ -10,6 +10,7 @@ Psystec's Discord: discord. /EyRgFdA
 * Chat format can be customized.
 * You can Enable/Disable Discord metions in Rust chat.
 * Can configure the discord chat to show the players steam icon.
+* Ignore messages containing banned words being sent to the discord.
 
 ## Permissions
  
@@ -37,7 +38,8 @@ To reload the config file with a console command you will need `chattodiscord.ad
   "GlobalChatFormat": "[{time}] [**GLOBAL**] **{username}**: `{message}`",
   "TeamChatFormat": "[{time}] [**TEAM**] **{username}**: `{message}`",
   "ConnectionFormat": "[{time}] **{username}**: {connectionstatus}",
-  "DateFormat": "yyyy-MM-dd HH:mm:ss"
+  "DateFormat": "yyyy-MM-dd HH:mm:ss",
+  "FilterBadWords": [ "badword1", "badword2" ]
 }
 ```
 ## Message Placeholders
