@@ -4,10 +4,11 @@ using System;
 using ConVar;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace Oxide.Plugins
 {
-    [Info("Chat to Discord Relay", "Psystec", "1.0.9")]
+    [Info("Chat to Discord Relay", "Psystec", "1.1.0")]
     [Description("Relay chat to Discord")]
 
     public class ChatToDiscord : CovalencePlugin
@@ -30,6 +31,7 @@ namespace Oxide.Plugins
             public string TeamChatFormat { get; set; } = "[{time}] [**TEAM**] **{username}**: `{message}`";
             public string ConnectionFormat { get; set; } = "[{time}] **{username}**: {connectionstatus}";
             public string DateFormat { get; set; } = "yyyy-MM-dd HH:mm:ss";
+            public string[] FilterBadWords { get; set; } = new string[] { "badword1" };
         }
 
         protected override void LoadDefaultMessages()
@@ -199,6 +201,12 @@ namespace Oxide.Plugins
         }
         private void SendToDiscord(string Webhook, string PlayerName, string PlayerID, string message)
         {
+            if (_configuration.FilterBadWords.Any(word => message.IndexOf(word, StringComparison.OrdinalIgnoreCase) >= 0))
+            {
+                PrintWarning($"Blocked message from {PlayerName} ({PlayerID}): {message}");
+                return;
+            }
+
             string steamUrl = $"http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key={_configuration.SteamApiKey}&steamids={PlayerID}";
             string defaultImage = "https://images.sftcdn.net/images/t_app-logo-l,f_auto,dpr_auto/p/e8326516-9b2c-11e6-9634-00163ec9f5fa/3905415571/rust-logo.png";
             //string defaultImage = "https://files.facepunch.com/lewis/1b2911b1/rust-marque.svg";
